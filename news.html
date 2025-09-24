@@ -480,6 +480,121 @@
         padding: 12px;
       }
     }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    .modal:target {
+      display: block;
+    }
+
+    .modal-content {
+      background: linear-gradient(to bottom, #0a0a2a 0%, #1a1a4b 100%);
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 800px;
+      position: relative;
+      border: 2px solid #d4af37;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: #d4af37;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .modal-header {
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      color: #d4af37;
+      font-size: 2rem;
+    }
+
+    .modal-date {
+      color: #f0e68c;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .modal-body {
+      line-height: 1.6;
+    }
+
+    .modal-body p {
+      margin-bottom: 15px;
+      color: #f0e68c;
+    }
+
+    .modal-body img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .modal-body ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    .modal-body li {
+      margin-bottom: 10px;
+      color: #f0e68c;
+    }
+
+    /* Loading animation */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .loading-spinner {
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 5px solid #d4af37;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Success message */
+    .success-message {
+      display: none;
+      background: rgba(46, 204, 113, 0.2);
+      border: 1px solid #2ecc71;
+      color: #2ecc71;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 15px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -518,7 +633,7 @@
   <section class="news">
     <h2 class="section-title">Latest Movie News</h2>
     
-    <!-- Featured News -->
+    <!-- Featured News (with CSS modal) -->
     <div class="featured-news">
       <div class="featured-card">
         <div class="featured-image">
@@ -529,14 +644,12 @@
           <h2>Marvel Announces Phase 6 Lineup with New Avengers</h2>
           <p class="news-date"><i class="far fa-calendar"></i> March 18, 2025</p>
           <p>Marvel Studios has revealed their Phase 6 slate, introducing new characters and bringing back fan favorites. The announcement includes "Avengers: Secret Wars" and several new standalone films that will expand the MCU in exciting new directions.</p>
-          <a href="news-details.html" class="read-more">Read Full Story</a>
+          <a href="#modal-featured" class="read-more">Read Full Story</a>
         </div>
       </div>
     </div>
-    
-    <!-- Regular News Grid -->
     <div class="news-grid">
-      <!-- News 1 -->
+      <!-- News 1 (with CSS modal) -->
       <div class="news-card">
         <div class="news-image">
           <img src="https://images.unsplash.com/photo-1489599809518-9080ca358ad1?auto=format&fit=crop&w=600&q=80" alt="New Releases">
@@ -545,11 +658,10 @@
           <p class="news-date"><i class="far fa-calendar"></i> March 15, 2025</p>
           <h3>Summer Blockbuster Preview: 10 Movies to Watch</h3>
           <p>Get ready for an exciting summer at the movies! From action-packed sequels to original stories, here's your guide to the most anticipated films hitting theaters in the coming months.</p>
-          <a href="news-details.html" class="read-more">Read More</a>
+          <a href="#modal-summer" class="read-more">Read More</a>
         </div>
       </div>
-      
-      <!-- News 2 -->
+      <!-- News 2 (with CSS modal) -->
       <div class="news-card">
         <div class="news-image">
           <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=600&q=80" alt="Behind the Scenes">
@@ -558,11 +670,10 @@
           <p class="news-date"><i class="far fa-calendar"></i> March 12, 2025</p>
           <h3>Behind the Scenes: Creating the Visual Effects for "Galaxy Quest"</h3>
           <p>Go behind the camera with the VFX team responsible for the stunning visuals in this year's biggest sci-fi epic. Learn how they brought alien worlds and space battles to life.</p>
-          <a href="news-details.html" class="read-more">Read More</a>
+          <a href="#modal-vfx" class="read-more">Read More</a>
         </div>
       </div>
-      
-      <!-- News 3 -->
+      <!-- News 3 (with CSS modal) -->
       <div class="news-card">
         <div class="news-image">
           <img src="https://images.unsplash.com/photo-1489599809518-9080ca358ad1?auto=format&fit=crop&w=600&q=80" alt="Director News">
@@ -571,20 +682,107 @@
           <p class="news-date"><i class="far fa-calendar"></i> March 10, 2025</p>
           <h3>Exclusive Interview with Director of "Midnight Run" Sequel</h3>
           <p>We sit down with the visionary director returning to helm the sequel to the 2022 action hit. Get insights into the new characters, stunts, and story developments.</p>
-          <a href="news-details.html" class="read-more">Read More</a>
+          <a href="#modal-interview" class="read-more">Read More</a>
         </div>
       </div>
     </div>
-    
-    <!-- Newsletter Section -->
-    <div class="newsletter">
-      <h3>Stay Updated on Movie News</h3>
-      <p>Subscribe to our newsletter to receive the latest movie updates, release dates, and exclusive content directly in your inbox.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Your email address" required>
-        <button type="submit">Subscribe</button>
-      </form>
+    <!-- CSS-only modals for each article -->
+    <div id="modal-featured" class="modal">
+      <div class="modal-content">
+        <a href="#" class="close-modal" title="Close">&times;</a>
+        <div class="modal-header">
+          <h2>Marvel Announces Phase 6 Lineup with New Avengers</h2>
+          <p class="modal-date">March 18, 2025</p>
+        </div>
+        <div class="modal-body">
+          <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=800&q=80" alt="Marvel Phase 6">
+          <p>Marvel Studios has officially unveiled their Phase 6 lineup at a special event in Los Angeles, sending shockwaves through the entertainment industry. The announcement came with a sizzle reel showcasing the upcoming films and introducing several new characters to the Marvel Cinematic Universe.</p>
+          <p>Phase 6 will kick off with "Fantastic Four: First Family" in late 2025, followed by "Blade" in early 2026. The phase will build towards two major Avengers films: "Avengers: Doomsday" and "Avengers: Secret Wars".</p>
+          <p>Kevin Feige, President of Marvel Studios, stated: "This is the most ambitious storytelling we've ever attempted. We're bringing together characters from across the multiverse in ways that will redefine what's possible in superhero cinema."</p>
+          <p>Notable additions to the MCU include the introduction of the X-Men, with casting announcements expected later this year. The phase will also explore the multiverse in greater depth, with cameos from previous Marvel film franchises.</p>
+          <p>Fans can expect to see familiar faces like Doctor Strange, Spider-Man, and Captain Marvel alongside newcomers like Nova and the Young Avengers. The phase is scheduled to conclude in 2027 with "Avengers: Secret Wars", which promises to be the culmination of the entire Multiverse Saga.</p>
+        </div>
+      </div>
     </div>
+    <div id="modal-summer" class="modal">
+      <div class="modal-content">
+        <a href="#" class="close-modal" title="Close">&times;</a>
+        <div class="modal-header">
+          <h2>Summer Blockbuster Preview: 10 Movies to Watch</h2>
+          <p class="modal-date">March 15, 2025</p>
+        </div>
+        <div class="modal-body">
+          <img src="https://images.unsplash.com/photo-1489599809518-9080ca358ad1?auto=format&fit=crop&w=600&q=80" alt="Summer Movies">
+          <p>Summer 2025 is shaping up to be one of the most exciting movie seasons in years, with sequels, reboots, and original stories all vying for the spotlight. From superhero sagas to animated adventures, here are 10 highly anticipated films you'll want on your watchlist:</p>
+          <ul>
+            <li><strong>Avengers: Doomsday (Marvel Studios)</strong> - The next big chapter in the MCU promises epic battles, new heroes, and the rise of Doctor Doom. Expect massive crossovers and high stakes.</li>
+            <li><strong>Superman (DC Studios / James Gunn)</strong> - The start of DC's new cinematic era, with a fresh take on Clark Kent and the Man of Steel. Fans are eager to see how Gunn reimagines the legend.</li>
+            <li><strong>Inside Out 2 (Pixar)</strong> - Joy, Sadness, and the gang return—this time exploring Riley's teenage emotions. A heartfelt family film with humor and depth.</li>
+            <li><strong>Frozen 3 (Disney)</strong> - Elsa and Anna are back for another icy adventure. Rumors suggest new kingdoms, new music, and even bigger magical challenges.</li>
+            <li><strong>Spider-Man: Beyond the Spider-Verse (Sony/Marvel Animation)</strong> - Miles Morales continues his multiverse journey after that jaw-dropping cliffhanger. Stunning animation and emotional storytelling guaranteed.</li>
+            <li><strong>Shrek 5 (DreamWorks)</strong> - Everyone's favorite ogre makes a long-awaited return. Expect plenty of laughs, nostalgia, and maybe a few new fairy-tale friends.</li>
+            <li><strong>How to Train Your Dragon (Live-Action Remake – Universal)</strong> - Hiccup and Toothless soar again, this time in a live-action retelling of the beloved classic.</li>
+            <li><strong>Avengers: Secret Wars (Marvel Studios – Tease for 2026)</strong> - While still a year away, Marvel may drop major teasers this summer that tie directly into Doomsday. Hype levels are through the roof.</li>
+            <li><strong>Moana 2 (Disney)</strong> - The adventurous navigator returns for another epic ocean journey, with brand-new songs and Polynesian legends.</li>
+            <li><strong>Kung Fu Panda 4 (DreamWorks)</strong> - Po faces new challenges as he trains the next generation of warriors while confronting a mysterious new villain.</li>
+          </ul>
+          <p>With such a diverse lineup, there's truly something for every moviegoer this summer. Mark your calendars and get ready for an unforgettable season at the cinema!</p>
+        </div>
+      </div>
+    </div>
+    <div id="modal-vfx" class="modal">
+      <div class="modal-content">
+        <a href="#" class="close-modal" title="Close">&times;</a>
+        <div class="modal-header">
+          <h2>Behind the Scenes: Creating the Visual Effects for "Galaxy Quest"</h2>
+          <p class="modal-date">March 12, 2025</p>
+        </div>
+        <div class="modal-body">
+          <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=600&q=80" alt="VFX Studio">
+          <p>Creating the stunning visual effects for this year's sci-fi epic "Galaxy Quest" required a team of over 300 artists working across three continents. We went behind the scenes with VFX supervisor Maria Chen to learn how they brought the film's incredible visuals to life.</p>
+          <p>"The biggest challenge was creating the alien planet of Xylos," Chen explained. "We wanted it to feel truly alien, but still believable. We studied extreme environments on Earth and combined elements from several different locations to create something entirely new."</p>
+          <p>The film features over 2,000 VFX shots, with the space battle sequences being particularly complex. "Each spaceship had to have its own distinct design and movement patterns," Chen said. "We worked closely with the director to ensure the action was both spectacular and easy to follow."</p>
+          <p>One of the most impressive sequences involves a character transforming into an energy being. "We developed a new fluid simulation technique for that effect," Chen revealed. "It took six months of R&D to get it right, but the result is unlike anything we've seen before."</p>
+          <p>The team also faced the challenge of creating realistic alien creatures. "We used a combination of practical effects and CGI," Chen said. "For the main alien character, we had an actor in a motion capture suit, then our animators enhanced the performance with digital details."</p>
+          <p>"Galaxy Quest" is now playing in theaters worldwide, with critics praising its visual achievements as groundbreaking for the sci-fi genre.</p>
+        </div>
+      </div>
+    </div>
+    <div id="modal-interview" class="modal">
+      <div class="modal-content">
+        <a href="#" class="close-modal" title="Close">&times;</a>
+        <div class="modal-header">
+          <h2>Exclusive Interview with Director of "Midnight Run" Sequel</h2>
+          <p class="modal-date">March 10, 2025</p>
+        </div>
+        <div class="modal-body">
+          <img src="https://images.unsplash.com/photo-1489599809518-9080ca358ad1?auto=format&fit=crop&w=600&q=80" alt="Director Interview">
+          <p>We sat down with acclaimed director Sofia Rodriguez, who is returning to helm the highly anticipated sequel to the 2022 action hit "Midnight Run". The original film was praised for its innovative chase sequences and complex characters, and fans are eager to see what Rodriguez has in store for the sequel.</p>
+          <p>"The sequel picks up five years after the events of the first film," Rodriguez explained. "Our protagonist has tried to leave that life behind, but circumstances force her back into the world she thought she'd escaped."</p>
+          <p>When asked about the pressure of following up such a successful film, Rodriguez was philosophical. "There's always pressure, but I see it as a challenge rather than a burden. We're not just rehashing the same story - we're expanding the world and exploring new aspects of the characters."</p>
+          <p>The director revealed that the sequel will feature even more ambitious action sequences. "We've pushed the boundaries of what's possible with practical effects. There's a chase sequence through a crowded market in Bangkok that we shot entirely in one take - it was incredibly challenging but the result is breathtaking."</p>
+          <p>Rodriguez also teased some new characters who will be introduced in the sequel. "We have an incredible new antagonist played by Daniel Lee. He brings a different energy to the film - more calculating and methodical than the villains in the first movie."</p>
+          <p>"Midnight Run: Redemption" is scheduled for release in November 2025, with early test screenings generating positive buzz.</p>
+        </div>
+      </div>
+    </div>
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        overflow-y: auto;
+      }
+
+      .modal:target {
+        display: block;
+      }
+    </style>
   </section>
 
   <footer>
@@ -596,5 +794,7 @@
     </div>
     <p>&copy; 2025 CineMagic. All Rights Reserved.</p>
   </footer>
+
+  <!-- All JavaScript removed for CSS-only version -->
 </body>
 </html>
